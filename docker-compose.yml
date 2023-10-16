@@ -1,0 +1,36 @@
+version: '3'
+services:
+  nest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    networks:
+      - mynetwork
+    depends_on:
+      - postgres-db
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_HOST: postgres-db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: contacts-db
+      URL: https://localhost:3000/
+    command: 'npm run start:dev'
+
+  postgres-db:
+    image: postgres
+    container_name: postgres-container
+    ports:
+      - '5432:5432'
+    networks:
+      - mynetwork
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: contacts-db
+networks:
+  mynetwork:
