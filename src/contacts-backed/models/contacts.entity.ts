@@ -9,26 +9,27 @@ export class Contacts {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'name' })
+  @Column({
+    name: 'name',
+    type: 'varchar',
+    length: 255 })
   name: string;
 
-  // @Column({
-  //   name: 'email_address',
-  //   type: 'varchar',
-  //   length: 100,
-  //   nullable: true,
-  // })
-  // emailAddress: string;
+  @Column({
+    name: 'email',
+    type: 'varchar',
+    length: 100,
+    nullable: true,
+  })
+  email: string;
 
-  // @Column({
-  //   name: 'phone number',
-  //   type: 'number',
-  //   length: 10,
-  //   nullable: false
-  // })
-  // contact: number;
-
-  @Column({default: true})
-  active: boolean;
+  @Column({
+    name: 'contact',
+    type: 'varchar',
+    length: 15,
+    nullable: false,
+    unique: true,
+  })
+  contact: string;
 }
 
